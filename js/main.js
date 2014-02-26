@@ -75,5 +75,20 @@ $(function(){
 						});
 					}
 				}
-			}
+		}
 
+		this.OnDragEnd = functions(event){
+			this.drag = [];
+			var touches = event.originalEvent.touches || [event.originalEvent];
+			for(var t=0; t<touches.length; t++) { 
+				var el = touches[t].target.parentNode;
+
+				if(el.className.search('sticker') >-1){
+					el = touches[t].target.parentNode.parentNode;
+				}
+				$(el).children().toggleClass('upSky');
+			}
+		}
+	}
+		
+	
