@@ -4,21 +4,16 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	
-	<script src="js/vendor/modernizr-2.7.1.min.js"></script>
-	<script src="jquery-1.7.2.min.js"></script>
-	<script src="js/hammer.js"></script>
-	<script src="js/jquery.hammer.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
-        
+	
 	<title>Boilerstrap Homework</title>
 
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type='text/css' href="css/main.css">
+
 
 	<style>
 	.content-area{
@@ -38,6 +33,16 @@
 		width: 20px;
 	}
 	</style>
+	<style>
+		body{
+			padding: 0;
+			overflow: hidden;
+		}
+		#pinchzoom{
+			-webkit-transform: translate3d(0,0,0,);
+			overflow: hidden;
+		}
+	</style>
 
     </head>
     <body>
@@ -47,27 +52,28 @@
 		Pinch and rotate them.<br/>
 		Swipe to change the track.</p>
 	</div>
-	<div id="zoomwrapper">
-		<div id="zoom" class"zoomProps">
-			<div class="polaroid">
+	<div id=pinchzoom>
+	<div id="zoomwrapper1">
+		<div id="zoom1" class"zoomProps">
+			<div id="rect1" class="polaroid">
 				<img src="pictures/pic1.jpg" alt="" width="300" height="200" />
 				<span>Aventador</span>
 			</div>
 		</div>
 		<div id="zoom2" class "zoomProps">
-			<div class="polaroid">
+			<div id="rect2" class="polaroid">
 				<img src="pictures/pic4.jpg" alt="" width="300" height="200" />
 				<span>Gallardo</span>
 			</div>
 		</div>
 		<div id="zoom3" class "zoomProps">
-			<div class+"polaroid">
+			<div id="rect2" class="polaroid">
 				<img src="pictures/pic5.jpg" alt="" width="300" height="200" />
 				<span>Reventon</span>
 			</div>
 		</div>
 	</div>
-	
+	</div>
 	<div class="content-area">
 	<div id="myCarousel" class="carousel slide">
 	<ol class="carousel-indicators">
@@ -97,7 +103,18 @@
 	</a>
 	</div>
 	</div>
-
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="js/vendor/modernizr-2.7.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="js/hammer2.js"></script>
+	<script src="js/jquery.hammer.js"></script>
+	<script src="http://use.edgefonts.net/damion.js"></script>
+	<script src="js/jquery.hammer.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+	
 	<script>
 	$(document).ready(function(){
 		$('#myCarousel').hammer().on('swipeleft',function(){
@@ -107,6 +124,47 @@
 			$('#myCarousel').carousel('prev');
 		})
 	});
-	</script>	
+	</script>
+	<script>
+		var hammertime = Hammer(document.getElementById('pinchzoom'), {
+			transform_always_block: true,
+			transform_min_scale: 1,
+			drag_block_horizontal: true,
+			drag_block_vertical: true,
+			drag_min_distance: 0
+		});
+
+		var rect = document.getElementById('rect');
+
+		var posX=0, posY=0,
+		    scale=1, last_scale,
+		    rotation= 1, last_rotation;
+
+		hammertime.on('touch drag transform', function(ev) {
+			switch(ev.type) {
+				case 'touch':
+					last_scale = scale;
+					last_rotation = rotation;
+					break;
+
+				case 'transform':
+					rotation = last_rotation + ev.gesture.rotation;
+					scale = Math.max(1, Math.min(last_scale * ev.gesture.scale, 10));
+					break;
+			}
+
+			var transform =
+				"translate3d("+posX+"px,"+posY+"px, 0) " +
+				"scale3d("+scale+","+scale+", 1) " +
+				"rotate("+rotation+"deg) ";
+
+			rect.style.transform = transform;
+			rect.style.oTransform = transform;
+			rect.style.msTransform = transform;
+			rect.style.mozTransform = transform;
+			rect.style.webkitTransform = transform;
+		});
+		</script>
+
     </body>
 </html>
