@@ -3,15 +3,41 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Boilerstrap Homework</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<script src="js/vendor/modernizr-2.7.1.min.js"></script>
+	<script src="jquery-1.7.2.min.js"></script>
+	<script src="js/hammer.js"></script>
+	<script src="js/jquery.hammer.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+        
+	<title>Boilerstrap Homework</title>
 
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/main.css">
-	<script src="js/vendor/modernizr-2.7.1.min.js"></script>
 
+	<style>
+	.content-area{
+		position: relative;
+		width: 960px;
+		margin: 0 auto;
+	}
+
+	.carousel-indicators li{
+		border-radius: 50%;
+		height: 20px;
+		width: 20px;
+	}
+
+	.carousel-indicators .active{
+		height: 20px;
+		width: 20px;
+	}
+	</style>
 
     </head>
     <body>
@@ -23,30 +49,64 @@
 	</div>
 	<div id="zoomwrapper">
 		<div id="zoom" class"zoomProps">
-			<div class="sticker">
+			<div class="polaroid">
 				<img src="pictures/pic1.jpg" alt="" width="300" height="200" />
 				<span>Aventador</span>
 			</div>
 		</div>
 		<div id="zoom2" class "zoomProps">
-			<div class="sticker">
+			<div class="polaroid">
 				<img src="pictures/pic4.jpg" alt="" width="300" height="200" />
 				<span>Gallardo</span>
 			</div>
 		</div>
 		<div id="zoom3" class "zoomProps">
-			<div class+"sticker">
+			<div class+"polaroid">
 				<img src="pictures/pic5.jpg" alt="" width="300" height="200" />
 				<span>Reventon</span>
 			</div>
 		</div>
 	</div>
-	<script src="jquery-1.7.2.min.js"></script>
-	<script src="js/hammer.js"></script>
-	<script src="js/jquery.hammer.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
 	
+	<div class="content-area">
+	<div id="myCarousel" class="carousel slide">
+	<ol class="carousel-indicators">
+		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		<li data-target="#myCarousel" data-slide-to="1"></li>
+		<li data-target="#myCarousel" data-slide-to="2"></li>
+	</ol>
+
+	<div class="carousel-inner">
+	<div class="item active">
+		<img src="bg1.jpg">
+	</div>
+	<div class="item">
+		<img src="bg2.jpg">
+	</div>
+	<div class="item">
+		<img src="bg3.jpg">
+	</div>
+	</div>
+	</div>
+
+	<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+		<span class="icon-prev"></span>
+	</a>
+	<a class="right carousel-control" href="#myCarousel" data-slide="prev">
+		<span class="icon-next"></span>
+	</a>
+	</div>
+	</div>
+
+	<script>
+	$(document).ready(function(){
+		$('#myCarousel').hammer().on('swipeleft',function(){
+			$('#myCarousel').carousel('next');
+		})
+		$('#myCarousel').hammer().on('swiperight', function(){
+			$('#myCarousel').carousel('prev');
+		})
+	});
+	</script>	
     </body>
 </html>
