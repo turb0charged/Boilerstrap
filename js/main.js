@@ -141,4 +141,33 @@ $(function(){
 			cssOrigin = (-(left) + toX)/scalefactor + "px " + (-(top) + toY)/scalfactor + "px";
 		})
 
+		container.bind("transform", function(event){
+			scaleFactor = previousScaleFactor * event.scale;
+
+			scaleFactor = Math.max(MIN_ZOOM, Math.min(scaleFactor, MAX_ZOOM));
+			transform(event);
+		});
+
+		container.bind("transformed", function(event){
+			previousScaleFactor = scaleFactor;
+		});
+
+		var dragview = new DragView($(container));
+		container.bind("dragstart", $.proxy(dragview.OnDragStart, dragview));
+		container.bind("drag", $.proxy(dragview.OnDrag, dragview));
+		container.bind("dragend", $.proxy(dragview.OnDragEnd, dragview));
 		
+		setInterval($.proxy(dragview.WatchDrag, dragview) ,10);
+
+		function transform(e){
+			var cssScale = "scaleX("+ scaleFactor +") scaleY("+ scaleFactor +") rotateZ("+ e.rotation +"deg)";
+
+			element.css({
+				webkitTransform: cssScale,
+				webkitTransformOrigin: cssOrigin,
+
+				transform: cssScale,
+				transformOrigin: cssOrigin,
+			});
+		}
+	}
