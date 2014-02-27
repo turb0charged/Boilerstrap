@@ -52,27 +52,37 @@
 		Pinch and rotate them.<br/>
 		Swipe to change the track.</p>
 	</div>
-	<div id=pinchzoom>
 	<div id="zoomwrapper1">
-		<div id="zoom1" class"zoomProps">
-			<div id="rect1" class="polaroid">
-				<img src="pictures/pic1.jpg" alt="" width="300" height="200" />
+		<div id="zoom1" class="zoomProps">
+			<div class="polaroid">
+				<div id="pinchzoom">
+				<div>
+				<img src="pictures/pic1.jpg" alt="" width="300" height="200" ondragstart="return false" />
 				<span>Aventador</span>
+				</div>
+				</div>
 			</div>
 		</div>
-		<div id="zoom2" class "zoomProps">
-			<div id="rect2" class="polaroid">
-				<img src="pictures/pic4.jpg" alt="" width="300" height="200" />
+		<div id="zoom2" class="zoomProps">
+			<div class="polaroid">
+				<div id="pinchzoom">
+				<div>
+				<img src="pictures/pic4.jpg" alt="" width="300" height="200"  />
 				<span>Gallardo</span>
+				</div>
+				</div>
 			</div>
 		</div>
-		<div id="zoom3" class "zoomProps">
-			<div id="rect2" class="polaroid">
+		<div id="zoom3" class="zoomProps">
+				<div class="polaroid">
+				<div id="pinchzoom">
+				<div>
 				<img src="pictures/pic5.jpg" alt="" width="300" height="200" />
 				<span>Reventon</span>
+				</div>
+				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 	<div class="content-area">
 	<div id="myCarousel" class="carousel slide">
@@ -113,7 +123,7 @@
 	<script src="js/jquery.hammer.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
+      <!--  <script src="js/main.js"></script>-->
 	
 	<script>
 	$(document).ready(function(){
